@@ -28,8 +28,8 @@ for g in GROUPS:
             instance = read_tsplib_cvrptw(pth)
             instance = normalize_instance(instance)
             data.append(instance)
-            print(instance['features'])
-        buffer = {'tw_frac=0.25': [], 'tw_frac=0.5': [], 'tw_frac=0.75': [], 'tw_frac=1.0': []}
+            print(instance)
+        buffer = {'tw_frac=1.0': []}
         # infer tw frac of instance
         for instance in data:
             org_df = instance['features'].loc[1:, :]    # without depot!
@@ -38,6 +38,7 @@ for g in GROUPS:
             buffer[f"tw_frac={tw_frac}"].append(to_rp_instance(instance))
 
         instances[type] = buffer
+
 
 with open(DATA_SPATH, 'wb') as f:
     pickle.dump(instances, f, protocol=pickle.HIGHEST_PROTOCOL)
