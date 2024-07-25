@@ -3,7 +3,7 @@
 
 defaults:
   - _self_
-  - env: all_1_high
+  - env: all_high
   - policy: gnn_attn
   - baseline: rollout
   - meta: train
