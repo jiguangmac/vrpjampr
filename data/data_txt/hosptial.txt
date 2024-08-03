@@ -2,12 +2,12 @@ hosptial
 
 VEHICLE
 NUMBER     CAPACITY
-  3          50
+  4          200
 
 CUSTOMER
 CUST NO.   XCOORD.   YCOORD.    DEMAND   READY TIME   DUE DATE   SERVICE TIME
  
-    0          31      31           0       0         230           0
+    0          31      31           0       0         100           0
     1          32      26           8      75          85          10
     2           7      58          16      75          85          10
     3          33      42           4      60          70          10
