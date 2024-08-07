@@ -6,7 +6,7 @@ import torch
 
 def dimacs_challenge_dist_fn_np(i: Union[np.ndarray, float],
                                 j: Union[np.ndarray, float],
-                                scale: int = 100,
+                                scale: int = 10000,
                                 ) -> np.ndarray:
     """
     times/distances are obtained from the location coordinates,
@@ -21,7 +21,7 @@ def dimacs_challenge_dist_fn_np(i: Union[np.ndarray, float],
 
 
 @torch.jit.script
-def dimacs_challenge_dist_fn(i: torch.Tensor, j: torch.Tensor, scale: int = 100,) -> torch.Tensor:
+def dimacs_challenge_dist_fn(i: torch.Tensor, j: torch.Tensor, scale: int = 10000,) -> torch.Tensor:
     """
     times/distances are obtained from the location coordinates,
     by computing the Euclidean distances truncated to one

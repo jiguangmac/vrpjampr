@@ -15,6 +15,7 @@ from lib.routing.formats import RPInstance
 __all__ = [
     'read_tsplib_cvrptw',
     'normalize_instance',
+    'my_normalize_instance',
     'to_rp_instance',
     'load_instance',
     'process_group',
@@ -66,6 +67,28 @@ def normalize_instance(instance):
     # x/y coords are integers in [0, 100]
     df['x_coord'] /= 100
     df['y_coord'] /= 100
+    # demand will be normalized by vehicle capacity
+    df['demand'] /= instance['vehicle_capacity']
+    # TW and service times are normalized by service horizon (TW of depot)
+    service_horizon = df['tw_end'][0]
+    df['tw_start'] /= service_horizon
+    df['tw_end'] /= service_horizon
+    df['service_time'] /= service_horizon
+    df['tw_len'] /= service_horizon
+
+    # to calculate the correct distance matrix of normalized coordinates interpreted as times
+    # for constraint checking, one needs to correct for the normalization
+    #instance['dist_to_time_factor'] = 100 / service_horizon
+    instance['org_service_horizon'] = service_horizon
+    instance['norm_features'] = df
+
+    return instance
+
+def my_normalize_instance(instance):
+    df = deepcopy(instance['features'])
+    # x/y coords are integers in [0, 100]
+    df['x_coord'] /= 10000
+    df['y_coord'] /= 10000
     # demand will be normalized by vehicle capacity
     df['demand'] /= instance['vehicle_capacity']
     # TW and service times are normalized by service horizon (TW of depot)

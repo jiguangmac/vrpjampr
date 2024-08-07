@@ -3,7 +3,7 @@ import pickle
 
 from lib.utils.io_utils import (
     read_tsplib_cvrptw,
-    normalize_instance,
+    my_normalize_instance,
     to_rp_instance,
 )
 
@@ -17,7 +17,7 @@ data = []
 pth = os.path.join(load_pth, file_name[0])
 print(f"preparing file '{file_name}' from {pth}")
 instance = read_tsplib_cvrptw(pth)
-instance = normalize_instance(instance)
+instance = my_normalize_instance(instance)
 data.append(instance)
 print(instance)
 buffer = {'tw_frac=1.0': []}

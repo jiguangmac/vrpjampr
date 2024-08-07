@@ -684,7 +684,8 @@ class RPGenerator:
         for grp in cfg['groups']:
             for typ in cfg['types']:
                 for twf in cfg['tw_fracs']:
-                    instances.append(data[f"{grp}{typ}"][f"tw_frac={twf}"])
+                    if twf == 1.0 and typ == '1' and grp == 'r':
+                        instances.append(data[f"{grp}{typ}"][f"tw_frac={twf}"])
         data = list(it.chain.from_iterable(instances))
 
         if limit is not None and len(data) != (limit-offset):
