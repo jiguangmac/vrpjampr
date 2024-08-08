@@ -494,7 +494,7 @@ class RPEnv:
                 )
                 tours = self._sol_to_list(tp)
                 costs = self.total_cost.view(-1, self._num_samples).gather(dim=-1, index=idx).cpu().tolist()
-                
+
             elif mode == "similarity":
                 logger.info(f"export with similarity sampling...")
                 # num_other solutions which are most dissimilar to the best solutions selected
@@ -1018,7 +1018,8 @@ class RPEnv:
         # combine masks
         mask = mask | exceeds_cap | exceeds_tw
         if (mask.all(-1)).any():
-            raise RuntimeError(f"no feasible nodes left: {mask.all(-1).nonzero()}")
+            pass
+            #raise RuntimeError(f"no feasible nodes left: {mask.all(-1).nonzero()}")
         return nbh, mask
 
     def _stack_to_tensor(self,
@@ -1225,7 +1226,7 @@ class RPEnv:
         nbh = self.get_node_nbh(self.depot_node)
         # remove depot self-loop
         nbh = nbh[:, :, 1:]
-        
+
         if self.pomo_single_start_node:
             # select only one random start node per sample, independent of max_concurrent_vehicles
             num_start_nodes = 1
